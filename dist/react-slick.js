@@ -421,16 +421,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var dots;
 
 	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
-	      var dotProps = {
+	      var _dotProps;
+
+	      var dotProps = (_dotProps = {
 	        dotsClass: this.props.dotsClass,
 	        slideCount: this.state.slideCount,
 	        slidesToShow: this.props.slidesToShow,
 	        currentSlide: this.state.currentSlide,
 	        slidesToScroll: this.props.slidesToScroll,
 	        clickHandler: this.changeSlide,
-	        children: this.props.children,
-	        customPaging: this.props.customPaging
-	      };
+	        children: this.props.children
+	      }, _dotProps['slidesToShow'] = this.props.slidesToShow, _dotProps.customPaging = this.props.customPaging, _dotProps);
 
 	      dots = _react2.default.createElement(_dots.Dots, dotProps);
 	    }
@@ -1350,6 +1351,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else {
 	        currentSlide = targetSlide - this.state.slideCount;
 	      }
+	    } else if (targetSlide > this.state.slideCount - this.props.slidesToShow && !this.props.infinite) {
+	      currentSlide = this.state.slideCount - this.props.slidesToShow;
 	    } else {
 	      currentSlide = targetSlide;
 	    }
@@ -2870,8 +2873,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Credit: http://stackoverflow.com/a/13735425/1849458
 	    var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map(function (x, i) {
 
+	      var maxSlide = _this2.props.slideCount - _this2.props.slidesToShow;
+	      var slideOffset = maxSlide % _this2.props.slidesToScroll;
+
 	      var leftBound = i * _this2.props.slidesToScroll;
+
 	      var rightBound = i * _this2.props.slidesToScroll + (_this2.props.slidesToScroll - 1);
+
+	      if (slideOffset) {
+	        leftBound = leftBound + slideOffset - _this2.props.slidesToScroll;
+	        leftBound = leftBound < 0 ? 0 : leftBound;
+
+	        rightBound = rightBound + slideOffset - _this2.props.slidesToScroll;
+	        rightBound = rightBound < 0 ? 0 : rightBound;
+	      }
+
 	      var className = (0, _classnames2.default)({
 	        'slick-active': _this2.props.currentSlide >= leftBound && _this2.props.currentSlide <= rightBound
 	      });
