@@ -203,6 +203,8 @@ var helpers = {
       } else {
         currentSlide = targetSlide - this.state.slideCount;
       }
+    } else if (targetSlide > this.state.slideCount - this.props.slidesToShow && !this.props.infinite) {
+      currentSlide = this.state.slideCount - this.props.slidesToShow;
     } else {
       currentSlide = targetSlide;
     }
