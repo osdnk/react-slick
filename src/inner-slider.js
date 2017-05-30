@@ -165,6 +165,7 @@ export var InnerSlider = createReactClass({
         slidesToScroll: this.props.slidesToScroll,
         clickHandler: this.changeSlide,
         children: this.props.children,
+        slidesToShow: this.props.slidesToShow,
         customPaging: this.props.customPaging
       };
 
