@@ -37,8 +37,22 @@ export class Dots extends React.Component {
     // Credit: http://stackoverflow.com/a/13735425/1849458
     var dots = Array.apply(null, Array(dotCount + 1).join('0').split('')).map((x, i) => {
 
+      const maxSlide = this.props.slideCount - this.props.slidesToShow;
+      const slideOffset = (maxSlide % this.props.slidesToScroll);
+
       var leftBound = (i * this.props.slidesToScroll);
+
       var rightBound = (i * this.props.slidesToScroll) + (this.props.slidesToScroll - 1);
+
+      if (slideOffset) {
+        leftBound = leftBound + slideOffset - this.props.slidesToScroll;
+        leftBound = leftBound < 0 ? 0 : leftBound;
+
+        rightBound = rightBound + slideOffset - this.props.slidesToScroll;
+        rightBound = rightBound < 0 ? 0 : rightBound;
+      }
+
+
       var className = classnames({
         'slick-active': (this.props.currentSlide >= leftBound) && (this.props.currentSlide <= rightBound)
       });
