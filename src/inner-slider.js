@@ -11,6 +11,7 @@ import assign from 'object-assign';
 
 import {Track} from './track';
 import {Dots} from './dots';
+import {Bar} from './bar';
 import {PrevArrow, NextArrow} from './arrows';
 
 export var InnerSlider = createReactClass({
@@ -165,11 +166,25 @@ export var InnerSlider = createReactClass({
         slidesToScroll: this.props.slidesToScroll,
         clickHandler: this.changeSlide,
         children: this.props.children,
-        slidesToShow: this.props.slidesToShow,
         customPaging: this.props.customPaging
       };
 
       dots = (<Dots {...dotProps} />);
+    }
+
+    var bar;
+
+    if (this.props.bar === true && this.state.slideCount >= this.props.slidesToShow) {
+      var barProps = {
+        barClass: this.props.barClass,
+        barThumbClass: this.props.barThumbClass,
+        slideCount: this.state.slideCount,
+        slidesToShow: this.props.slidesToShow,
+        currentSlide: this.state.currentSlide,
+        trackWidth: this.state.trackWidth,
+      };
+
+      bar = (<Bar {...barProps} />);
     }
 
     var prevArrow, nextArrow;
@@ -243,6 +258,7 @@ export var InnerSlider = createReactClass({
         </div>
         {nextArrow}
         {dots}
+        {bar}
       </div>
     );
   }
