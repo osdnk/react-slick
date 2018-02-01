@@ -15,6 +15,8 @@ var defaultProps = {
     },
     dots: false,
     dotsClass: 'slick-dots',
+    barClass: 'slick-bar',
+    barThumbClass: 'slick-bar-thumb',
     draggable: true,
     easing: 'linear',
     edgeFriction: 0.35,
