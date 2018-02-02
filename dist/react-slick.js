@@ -78,7 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(21);
+	var _json2mq = __webpack_require__(22);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
@@ -86,7 +86,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _canUseDom = __webpack_require__(23);
+	var _canUseDom = __webpack_require__(24);
 
 	var _canUseDom2 = _interopRequireDefault(_canUseDom);
 
@@ -98,7 +98,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var enquire = _canUseDom2.default && __webpack_require__(24);
+	var enquire = _canUseDom2.default && __webpack_require__(25);
 
 	var Slider = function (_React$Component) {
 	  _inherits(Slider, _React$Component);
@@ -273,11 +273,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _dots = __webpack_require__(19);
 
-	var _arrows = __webpack_require__(20);
+	var _bar = __webpack_require__(20);
+
+	var _arrows = __webpack_require__(21);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var InnerSlider = exports.InnerSlider = (0, _createReactClass2.default)({
+	  displayName: 'InnerSlider',
+
 	  mixins: [_helpers2.default, _eventHandlers2.default],
 	  list: null,
 	  track: null,
@@ -421,19 +425,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var dots;
 
 	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
-	      var _dotProps;
-
-	      var dotProps = (_dotProps = {
+	      var dotProps = {
 	        dotsClass: this.props.dotsClass,
 	        slideCount: this.state.slideCount,
 	        slidesToShow: this.props.slidesToShow,
 	        currentSlide: this.state.currentSlide,
 	        slidesToScroll: this.props.slidesToScroll,
 	        clickHandler: this.changeSlide,
-	        children: this.props.children
-	      }, _dotProps['slidesToShow'] = this.props.slidesToShow, _dotProps.customPaging = this.props.customPaging, _dotProps);
+	        children: this.props.children,
+	        customPaging: this.props.customPaging
+	      };
 
 	      dots = _react2.default.createElement(_dots.Dots, dotProps);
+	    }
+
+	    var bar;
+
+	    if (this.props.bar === true && this.state.slideCount >= this.props.slidesToShow) {
+	      var barProps = {
+	        barClass: this.props.barClass,
+	        barThumbClass: this.props.barThumbClass,
+	        slideCount: this.state.slideCount,
+	        slidesToShow: this.props.slidesToShow,
+	        currentSlide: this.state.currentSlide,
+	        trackWidth: this.state.trackWidth
+	      };
+
+	      bar = _react2.default.createElement(_bar.Bar, barProps);
 	    }
 
 	    var prevArrow, nextArrow;
@@ -511,7 +529,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        )
 	      ),
 	      nextArrow,
-	      dots
+	      dots,
+	      bar
 	    );
 	  }
 	});
@@ -1584,6 +1603,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    dots: false,
 	    dotsClass: 'slick-dots',
+	    barClass: 'slick-bar',
+	    barThumbClass: 'slick-bar-thumb',
 	    draggable: true,
 	    easing: 'linear',
 	    edgeFriction: 0.35,
@@ -1624,12 +1645,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
+	 * Copyright (c) 2013-present, Facebook, Inc.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 *
 	 */
 
@@ -1637,6 +1656,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(2);
 	var factory = __webpack_require__(12);
+
+	if (typeof React === 'undefined') {
+	  throw Error(
+	    'create-react-class could not find the React object. If you are using script tags, ' +
+	      'make sure that React is being loaded before create-react-class.'
+	  );
+	}
 
 	// Hack to grab NoopUpdateQueue from isomorphic React
 	var ReactNoopUpdateQueue = new React.Component().updater;
@@ -1653,12 +1679,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
+	 * Copyright (c) 2013-present, Facebook, Inc.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 *
 	 */
 
@@ -1686,7 +1710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  ReactPropTypeLocationNames = {
 	    prop: 'prop',
 	    context: 'context',
-	    childContext: 'child context',
+	    childContext: 'child context'
 	  };
 	} else {
 	  ReactPropTypeLocationNames = {};
@@ -1696,7 +1720,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Policies that describe methods in `ReactClassInterface`.
 	   */
-
 
 	  var injectedMixins = [];
 
@@ -1723,7 +1746,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @internal
 	   */
 	  var ReactClassInterface = {
-
 	    /**
 	     * An array of Mixin objects to include when defining your component.
 	     *
@@ -1814,7 +1836,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *   }
 	     *
 	     * @return {ReactComponent}
-	     * @nosideeffects
 	     * @required
 	     */
 	    render: 'DEFINE_ONCE',
@@ -1929,6 +1950,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    componentWillUnmount: 'DEFINE_MANY',
 
+	    /**
+	     * Replacement for (deprecated) `componentWillMount`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillMount: 'DEFINE_MANY',
+
+	    /**
+	     * Replacement for (deprecated) `componentWillReceiveProps`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
+
+	    /**
+	     * Replacement for (deprecated) `componentWillUpdate`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
+
 	    // ==== Advanced methods ====
 
 	    /**
@@ -1942,7 +1984,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @overridable
 	     */
 	    updateComponent: 'OVERRIDE_BASE'
+	  };
 
+	  /**
+	   * Similar to ReactClassInterface but for static methods.
+	   */
+	  var ReactClassStaticInterface = {
+	    /**
+	     * This method is invoked after a component is instantiated and when it
+	     * receives new props. Return an object to update state in response to
+	     * prop changes. Return null to indicate no change to state.
+	     *
+	     * If an object is returned, its keys will be merged into the existing state.
+	     *
+	     * @return {object || null}
+	     * @optional
+	     */
+	    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
 	  };
 
 	  /**
@@ -1955,71 +2013,106 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * which all other static methods are defined.
 	   */
 	  var RESERVED_SPEC_KEYS = {
-	    displayName: function (Constructor, displayName) {
+	    displayName: function(Constructor, displayName) {
 	      Constructor.displayName = displayName;
 	    },
-	    mixins: function (Constructor, mixins) {
+	    mixins: function(Constructor, mixins) {
 	      if (mixins) {
 	        for (var i = 0; i < mixins.length; i++) {
 	          mixSpecIntoComponent(Constructor, mixins[i]);
 	        }
 	      }
 	    },
-	    childContextTypes: function (Constructor, childContextTypes) {
+	    childContextTypes: function(Constructor, childContextTypes) {
 	      if ((undefined) !== 'production') {
 	        validateTypeDef(Constructor, childContextTypes, 'childContext');
 	      }
-	      Constructor.childContextTypes = _assign({}, Constructor.childContextTypes, childContextTypes);
+	      Constructor.childContextTypes = _assign(
+	        {},
+	        Constructor.childContextTypes,
+	        childContextTypes
+	      );
 	    },
-	    contextTypes: function (Constructor, contextTypes) {
+	    contextTypes: function(Constructor, contextTypes) {
 	      if ((undefined) !== 'production') {
 	        validateTypeDef(Constructor, contextTypes, 'context');
 	      }
-	      Constructor.contextTypes = _assign({}, Constructor.contextTypes, contextTypes);
+	      Constructor.contextTypes = _assign(
+	        {},
+	        Constructor.contextTypes,
+	        contextTypes
+	      );
 	    },
 	    /**
 	     * Special case getDefaultProps which should move into statics but requires
 	     * automatic merging.
 	     */
-	    getDefaultProps: function (Constructor, getDefaultProps) {
+	    getDefaultProps: function(Constructor, getDefaultProps) {
 	      if (Constructor.getDefaultProps) {
-	        Constructor.getDefaultProps = createMergedResultFunction(Constructor.getDefaultProps, getDefaultProps);
+	        Constructor.getDefaultProps = createMergedResultFunction(
+	          Constructor.getDefaultProps,
+	          getDefaultProps
+	        );
 	      } else {
 	        Constructor.getDefaultProps = getDefaultProps;
 	      }
 	    },
-	    propTypes: function (Constructor, propTypes) {
+	    propTypes: function(Constructor, propTypes) {
 	      if ((undefined) !== 'production') {
 	        validateTypeDef(Constructor, propTypes, 'prop');
 	      }
 	      Constructor.propTypes = _assign({}, Constructor.propTypes, propTypes);
 	    },
-	    statics: function (Constructor, statics) {
+	    statics: function(Constructor, statics) {
 	      mixStaticSpecIntoComponent(Constructor, statics);
 	    },
-	    autobind: function () {} };
+	    autobind: function() {}
+	  };
 
 	  function validateTypeDef(Constructor, typeDef, location) {
 	    for (var propName in typeDef) {
 	      if (typeDef.hasOwnProperty(propName)) {
 	        // use a warning instead of an _invariant so components
 	        // don't show up in prod but only in __DEV__
-	        (undefined) !== 'production' ? warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName) : void 0;
+	        if ((undefined) !== 'production') {
+	          warning(
+	            typeof typeDef[propName] === 'function',
+	            '%s: %s type `%s` is invalid; it must be a function, usually from ' +
+	              'React.PropTypes.',
+	            Constructor.displayName || 'ReactClass',
+	            ReactPropTypeLocationNames[location],
+	            propName
+	          );
+	        }
 	      }
 	    }
 	  }
 
 	  function validateMethodOverride(isAlreadyDefined, name) {
-	    var specPolicy = ReactClassInterface.hasOwnProperty(name) ? ReactClassInterface[name] : null;
+	    var specPolicy = ReactClassInterface.hasOwnProperty(name)
+	      ? ReactClassInterface[name]
+	      : null;
 
 	    // Disallow overriding of base class methods unless explicitly allowed.
 	    if (ReactClassMixin.hasOwnProperty(name)) {
-	      _invariant(specPolicy === 'OVERRIDE_BASE', 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name);
+	      _invariant(
+	        specPolicy === 'OVERRIDE_BASE',
+	        'ReactClassInterface: You are attempting to override ' +
+	          '`%s` from your class specification. Ensure that your method names ' +
+	          'do not overlap with React methods.',
+	        name
+	      );
 	    }
 
 	    // Disallow defining methods more than once unless explicitly allowed.
 	    if (isAlreadyDefined) {
-	      _invariant(specPolicy === 'DEFINE_MANY' || specPolicy === 'DEFINE_MANY_MERGED', 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name);
+	      _invariant(
+	        specPolicy === 'DEFINE_MANY' || specPolicy === 'DEFINE_MANY_MERGED',
+	        'ReactClassInterface: You are attempting to define ' +
+	          '`%s` on your component more than once. This conflict may be due ' +
+	          'to a mixin.',
+	        name
+	      );
 	    }
 	  }
 
@@ -2033,14 +2126,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var typeofSpec = typeof spec;
 	        var isMixinValid = typeofSpec === 'object' && spec !== null;
 
-	        (undefined) !== 'production' ? warning(isMixinValid, '%s: You\'re attempting to include a mixin that is either null ' + 'or not an object. Check the mixins included by the component, ' + 'as well as any mixins they include themselves. ' + 'Expected object but got %s.', Constructor.displayName || 'ReactClass', spec === null ? null : typeofSpec) : void 0;
+	        if ((undefined) !== 'production') {
+	          warning(
+	            isMixinValid,
+	            "%s: You're attempting to include a mixin that is either null " +
+	              'or not an object. Check the mixins included by the component, ' +
+	              'as well as any mixins they include themselves. ' +
+	              'Expected object but got %s.',
+	            Constructor.displayName || 'ReactClass',
+	            spec === null ? null : typeofSpec
+	          );
+	        }
 	      }
 
 	      return;
 	    }
 
-	    _invariant(typeof spec !== 'function', 'ReactClass: You\'re attempting to ' + 'use a component class or function as a mixin. Instead, just use a ' + 'regular object.');
-	    _invariant(!isValidElement(spec), 'ReactClass: You\'re attempting to ' + 'use a component as a mixin. Instead, just use a regular object.');
+	    _invariant(
+	      typeof spec !== 'function',
+	      "ReactClass: You're attempting to " +
+	        'use a component class or function as a mixin. Instead, just use a ' +
+	        'regular object.'
+	    );
+	    _invariant(
+	      !isValidElement(spec),
+	      "ReactClass: You're attempting to " +
+	        'use a component as a mixin. Instead, just use a regular object.'
+	    );
 
 	    var proto = Constructor.prototype;
 	    var autoBindPairs = proto.__reactAutoBindPairs;
@@ -2075,7 +2187,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // 2. Overridden methods (that were mixed in).
 	        var isReactClassMethod = ReactClassInterface.hasOwnProperty(name);
 	        var isFunction = typeof property === 'function';
-	        var shouldAutoBind = isFunction && !isReactClassMethod && !isAlreadyDefined && spec.autobind !== false;
+	        var shouldAutoBind =
+	          isFunction &&
+	          !isReactClassMethod &&
+	          !isAlreadyDefined &&
+	          spec.autobind !== false;
 
 	        if (shouldAutoBind) {
 	          autoBindPairs.push(name, property);
@@ -2085,7 +2201,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var specPolicy = ReactClassInterface[name];
 
 	            // These cases should already be caught by validateMethodOverride.
-	            _invariant(isReactClassMethod && (specPolicy === 'DEFINE_MANY_MERGED' || specPolicy === 'DEFINE_MANY'), 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name);
+	            _invariant(
+	              isReactClassMethod &&
+	                (specPolicy === 'DEFINE_MANY_MERGED' ||
+	                  specPolicy === 'DEFINE_MANY'),
+	              'ReactClass: Unexpected spec policy %s for key %s ' +
+	                'when mixing in component specs.',
+	              specPolicy,
+	              name
+	            );
 
 	            // For methods which are defined more than once, call the existing
 	            // methods before calling the new property, merging if appropriate.
@@ -2113,6 +2237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!statics) {
 	      return;
 	    }
+
 	    for (var name in statics) {
 	      var property = statics[name];
 	      if (!statics.hasOwnProperty(name)) {
@@ -2120,10 +2245,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      var isReserved = name in RESERVED_SPEC_KEYS;
-	      _invariant(!isReserved, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name);
+	      _invariant(
+	        !isReserved,
+	        'ReactClass: You are attempting to define a reserved ' +
+	          'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' +
+	          'as an instance property instead; it will still be accessible on the ' +
+	          'constructor.',
+	        name
+	      );
 
-	      var isInherited = name in Constructor;
-	      _invariant(!isInherited, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name);
+	      var isAlreadyDefined = name in Constructor;
+	      if (isAlreadyDefined) {
+	        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name)
+	          ? ReactClassStaticInterface[name]
+	          : null;
+
+	        _invariant(
+	          specPolicy === 'DEFINE_MANY_MERGED',
+	          'ReactClass: You are attempting to define ' +
+	            '`%s` on your component more than once. This conflict may be ' +
+	            'due to a mixin.',
+	          name
+	        );
+
+	        Constructor[name] = createMergedResultFunction(Constructor[name], property);
+
+	        return;
+	      }
+
 	      Constructor[name] = property;
 	    }
 	  }
@@ -2136,11 +2285,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {object} one after it has been mutated to contain everything in two.
 	   */
 	  function mergeIntoWithNoDuplicateKeys(one, two) {
-	    _invariant(one && two && typeof one === 'object' && typeof two === 'object', 'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.');
+	    _invariant(
+	      one && two && typeof one === 'object' && typeof two === 'object',
+	      'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.'
+	    );
 
 	    for (var key in two) {
 	      if (two.hasOwnProperty(key)) {
-	        _invariant(one[key] === undefined, 'mergeIntoWithNoDuplicateKeys(): ' + 'Tried to merge two objects with the same key: `%s`. This conflict ' + 'may be due to a mixin; in particular, this may be caused by two ' + 'getInitialState() or getDefaultProps() methods returning objects ' + 'with clashing keys.', key);
+	        _invariant(
+	          one[key] === undefined,
+	          'mergeIntoWithNoDuplicateKeys(): ' +
+	            'Tried to merge two objects with the same key: `%s`. This conflict ' +
+	            'may be due to a mixin; in particular, this may be caused by two ' +
+	            'getInitialState() or getDefaultProps() methods returning objects ' +
+	            'with clashing keys.',
+	          key
+	        );
 	        one[key] = two[key];
 	      }
 	    }
@@ -2201,8 +2361,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      boundMethod.__reactBoundArguments = null;
 	      var componentName = component.constructor.displayName;
 	      var _bind = boundMethod.bind;
-	      boundMethod.bind = function (newThis) {
-	        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      boundMethod.bind = function(newThis) {
+	        for (
+	          var _len = arguments.length,
+	            args = Array(_len > 1 ? _len - 1 : 0),
+	            _key = 1;
+	          _key < _len;
+	          _key++
+	        ) {
 	          args[_key - 1] = arguments[_key];
 	        }
 
@@ -2210,9 +2376,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // ignore the value of "this" that the user is trying to use, so
 	        // let's warn.
 	        if (newThis !== component && newThis !== null) {
-	          (undefined) !== 'production' ? warning(false, 'bind(): React component methods may only be bound to the ' + 'component instance. See %s', componentName) : void 0;
+	          if ((undefined) !== 'production') {
+	            warning(
+	              false,
+	              'bind(): React component methods may only be bound to the ' +
+	                'component instance. See %s',
+	              componentName
+	            );
+	          }
 	        } else if (!args.length) {
-	          (undefined) !== 'production' ? warning(false, 'bind(): You are binding a component method to the component. ' + 'React does this for you automatically in a high-performance ' + 'way, so you can safely remove this call. See %s', componentName) : void 0;
+	          if ((undefined) !== 'production') {
+	            warning(
+	              false,
+	              'bind(): You are binding a component method to the component. ' +
+	                'React does this for you automatically in a high-performance ' +
+	                'way, so you can safely remove this call. See %s',
+	              componentName
+	            );
+	          }
 	          return boundMethod;
 	        }
 	        var reboundMethod = _bind.apply(boundMethod, arguments);
@@ -2239,11 +2420,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
-	  var IsMountedMixin = {
-	    componentDidMount: function () {
+	  var IsMountedPreMixin = {
+	    componentDidMount: function() {
 	      this.__isMounted = true;
-	    },
-	    componentWillUnmount: function () {
+	    }
+	  };
+
+	  var IsMountedPostMixin = {
+	    componentWillUnmount: function() {
 	      this.__isMounted = false;
 	    }
 	  };
@@ -2253,12 +2437,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * therefore not already part of the modern ReactComponent.
 	   */
 	  var ReactClassMixin = {
-
 	    /**
 	     * TODO: This will be deprecated because state should always keep a consistent
 	     * type signature and the only use case for this, is to avoid that.
 	     */
-	    replaceState: function (newState, callback) {
+	    replaceState: function(newState, callback) {
 	      this.updater.enqueueReplaceState(this, newState, callback);
 	    },
 
@@ -2268,17 +2451,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @protected
 	     * @final
 	     */
-	    isMounted: function () {
+	    isMounted: function() {
 	      if ((undefined) !== 'production') {
-	        (undefined) !== 'production' ? warning(this.__didWarnIsMounted, '%s: isMounted is deprecated. Instead, make sure to clean up ' + 'subscriptions and pending requests in componentWillUnmount to ' + 'prevent memory leaks.', this.constructor && this.constructor.displayName || this.name || 'Component') : void 0;
+	        warning(
+	          this.__didWarnIsMounted,
+	          '%s: isMounted is deprecated. Instead, make sure to clean up ' +
+	            'subscriptions and pending requests in componentWillUnmount to ' +
+	            'prevent memory leaks.',
+	          (this.constructor && this.constructor.displayName) ||
+	            this.name ||
+	            'Component'
+	        );
 	        this.__didWarnIsMounted = true;
 	      }
 	      return !!this.__isMounted;
 	    }
 	  };
 
-	  var ReactClassComponent = function () {};
-	  _assign(ReactClassComponent.prototype, ReactComponent.prototype, ReactClassMixin);
+	  var ReactClassComponent = function() {};
+	  _assign(
+	    ReactClassComponent.prototype,
+	    ReactComponent.prototype,
+	    ReactClassMixin
+	  );
 
 	  /**
 	   * Creates a composite component class given a class specification.
@@ -2292,12 +2487,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // To keep our warnings more understandable, we'll use a little hack here to
 	    // ensure that Constructor.name !== 'Constructor'. This makes sure we don't
 	    // unnecessarily identify a class without displayName as 'Constructor'.
-	    var Constructor = identity(function (props, context, updater) {
+	    var Constructor = identity(function(props, context, updater) {
 	      // This constructor gets overridden by mocks. The argument is used
 	      // by mocks to assert on what gets mounted.
 
 	      if ((undefined) !== 'production') {
-	        (undefined) !== 'production' ? warning(this instanceof Constructor, 'Something is calling a React component directly. Use a factory or ' + 'JSX instead. See: https://fb.me/react-legacyfactory') : void 0;
+	        warning(
+	          this instanceof Constructor,
+	          'Something is calling a React component directly. Use a factory or ' +
+	            'JSX instead. See: https://fb.me/react-legacyfactory'
+	        );
 	      }
 
 	      // Wire up auto-binding
@@ -2318,13 +2517,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var initialState = this.getInitialState ? this.getInitialState() : null;
 	      if ((undefined) !== 'production') {
 	        // We allow auto-mocks to proceed as if they're returning null.
-	        if (initialState === undefined && this.getInitialState._isMockFunction) {
+	        if (
+	          initialState === undefined &&
+	          this.getInitialState._isMockFunction
+	        ) {
 	          // This is probably bad practice. Consider warning here and
 	          // deprecating this convenience.
 	          initialState = null;
 	        }
 	      }
-	      _invariant(typeof initialState === 'object' && !Array.isArray(initialState), '%s.getInitialState(): must return an object or null', Constructor.displayName || 'ReactCompositeComponent');
+	      _invariant(
+	        typeof initialState === 'object' && !Array.isArray(initialState),
+	        '%s.getInitialState(): must return an object or null',
+	        Constructor.displayName || 'ReactCompositeComponent'
+	      );
 
 	      this.state = initialState;
 	    });
@@ -2334,8 +2540,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    injectedMixins.forEach(mixSpecIntoComponent.bind(null, Constructor));
 
-	    mixSpecIntoComponent(Constructor, IsMountedMixin);
+	    mixSpecIntoComponent(Constructor, IsMountedPreMixin);
 	    mixSpecIntoComponent(Constructor, spec);
+	    mixSpecIntoComponent(Constructor, IsMountedPostMixin);
 
 	    // Initialize the defaultProps property after all mixins have been merged.
 	    if (Constructor.getDefaultProps) {
@@ -2355,11 +2562,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 
-	    _invariant(Constructor.prototype.render, 'createClass(...): Class specification must implement a `render` method.');
+	    _invariant(
+	      Constructor.prototype.render,
+	      'createClass(...): Class specification must implement a `render` method.'
+	    );
 
 	    if ((undefined) !== 'production') {
-	      (undefined) !== 'production' ? warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component') : void 0;
-	      (undefined) !== 'production' ? warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component') : void 0;
+	      warning(
+	        !Constructor.prototype.componentShouldUpdate,
+	        '%s has a method called ' +
+	          'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' +
+	          'The name is phrased as a question because the function is ' +
+	          'expected to return a value.',
+	        spec.displayName || 'A component'
+	      );
+	      warning(
+	        !Constructor.prototype.componentWillRecieveProps,
+	        '%s has a method called ' +
+	          'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',
+	        spec.displayName || 'A component'
+	      );
+	      warning(
+	        !Constructor.prototype.UNSAFE_componentWillRecieveProps,
+	        '%s has a method called UNSAFE_componentWillRecieveProps(). ' +
+	          'Did you mean UNSAFE_componentWillReceiveProps()?',
+	        spec.displayName || 'A component'
+	      );
 	    }
 
 	    // Reduce time spent doing lookups by setting these on the prototype.
@@ -2384,11 +2612,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 *
 	 */
 
@@ -2408,11 +2634,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 *
 	 */
 
@@ -2467,12 +2691,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2014-2015, Facebook, Inc.
-	 * All rights reserved.
+	 * Copyright (c) 2014-present, Facebook, Inc.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 *
 	 */
 
@@ -2490,45 +2712,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	var warning = emptyFunction;
 
 	if ((undefined) !== 'production') {
-	  (function () {
-	    var printWarning = function printWarning(format) {
-	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	        args[_key - 1] = arguments[_key];
+	  var printWarning = function printWarning(format) {
+	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      args[_key - 1] = arguments[_key];
+	    }
+
+	    var argIndex = 0;
+	    var message = 'Warning: ' + format.replace(/%s/g, function () {
+	      return args[argIndex++];
+	    });
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+
+	  warning = function warning(condition, format) {
+	    if (format === undefined) {
+	      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+	    }
+
+	    if (format.indexOf('Failed Composite propType: ') === 0) {
+	      return; // Ignore CompositeComponent proptype check.
+	    }
+
+	    if (!condition) {
+	      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+	        args[_key2 - 2] = arguments[_key2];
 	      }
 
-	      var argIndex = 0;
-	      var message = 'Warning: ' + format.replace(/%s/g, function () {
-	        return args[argIndex++];
-	      });
-	      if (typeof console !== 'undefined') {
-	        console.error(message);
-	      }
-	      try {
-	        // --- Welcome to debugging React ---
-	        // This error was thrown as a convenience so that you can use this stack
-	        // to find the callsite that caused this warning to fire.
-	        throw new Error(message);
-	      } catch (x) {}
-	    };
-
-	    warning = function warning(condition, format) {
-	      if (format === undefined) {
-	        throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-	      }
-
-	      if (format.indexOf('Failed Composite propType: ') === 0) {
-	        return; // Ignore CompositeComponent proptype check.
-	      }
-
-	      if (!condition) {
-	        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-	          args[_key2 - 2] = arguments[_key2];
-	        }
-
-	        printWarning.apply(undefined, [format].concat(args));
-	      }
-	    };
-	  })();
+	      printWarning.apply(undefined, [format].concat(args));
+	    }
+	  };
 	}
 
 	module.exports = warning;
@@ -2541,11 +2761,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 *
 	 * 
 	 */
@@ -2925,6 +3143,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	exports.__esModule = true;
+	exports.Bar = undefined;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(17);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Bar = exports.Bar = function (_React$Component) {
+	  _inherits(Bar, _React$Component);
+
+	  function Bar() {
+	    _classCallCheck(this, Bar);
+
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+	  }
+
+	  Bar.prototype.render = function render() {
+	    var range = this.props.slideCount - this.props.slidesToShow;
+	    var position = this.props.currentSlide;
+	    var percentage = position / range;
+	    var width = this.props.trackWidth / (range + 1);
+	    var translate = percentage * (this.props.trackWidth - width);
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: this.props.barClass, style: { display: 'block' } },
+	      _react2.default.createElement('div', { className: this.props.barThumbClass, style: { display: 'block', width: width, transform: 'translateX(' + translate + 'px)' } })
+	    );
+	  };
+
+	  return Bar;
+	}(_react2.default.Component);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
 	exports.NextArrow = exports.PrevArrow = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3058,10 +3327,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(22);
+	var camel2hyphen = __webpack_require__(23);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -3114,7 +3383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = json2mq;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -3128,7 +3397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 	var canUseDOM = !!(
@@ -3140,19 +3409,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var MediaQueryDispatch = __webpack_require__(25);
+	var MediaQueryDispatch = __webpack_require__(26);
 	module.exports = new MediaQueryDispatch();
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var MediaQuery = __webpack_require__(26);
-	var Util = __webpack_require__(28);
+	var MediaQuery = __webpack_require__(27);
+	var Util = __webpack_require__(29);
 	var each = Util.each;
 	var isFunction = Util.isFunction;
 	var isArray = Util.isArray;
@@ -3239,11 +3508,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var QueryHandler = __webpack_require__(27);
-	var each = __webpack_require__(28).each;
+	var QueryHandler = __webpack_require__(28);
+	var each = __webpack_require__(29).each;
 
 	/**
 	 * Represents a single media query, manages it's state and registered handlers for this query
@@ -3338,7 +3607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3418,7 +3687,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	/**
