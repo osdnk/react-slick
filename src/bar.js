@@ -12,7 +12,7 @@ export class Bar extends React.Component {
     var translate = percentage * (this.props.trackWidth - width);
 
     return (
-      <div className={this.props.barClass} style={{display: 'block'}}>
+      <div className={this.props.barClass}>
         <div className={this.props.barThumbClass} style={{display: 'block', width: width + translate }} />
       </div>
     );
