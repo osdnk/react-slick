@@ -13,7 +13,7 @@ export class Bar extends React.Component {
 
     return (
       <div className={this.props.barClass} style={{display: 'block'}}>
-        <div className={this.props.barThumbClass} style={{display: 'block', width, transform: `translateX(${translate}px)` }} />
+        <div className={this.props.barThumbClass} style={{display: 'block', width: width + translate }} />
       </div>
     );
   }
