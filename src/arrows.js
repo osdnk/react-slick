@@ -27,7 +27,8 @@ export class PrevArrow extends React.Component {
     };
     let customProps = {
       currentSlide: this.props.currentSlide,
-      slideCount: this.props.slideCount
+      slideCount: this.props.slideCount,
+      slidesToShow: this.props.slidesToShow
     };
     let prevArrow;
 
