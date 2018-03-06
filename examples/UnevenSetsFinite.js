@@ -5,6 +5,7 @@ export default class UnevenSetsFinite extends Component {
   render() {
     var settings = {
       dots: true,
+      bar: true,
       infinite: false,
       speed: 500,
       slidesToScroll: 4,

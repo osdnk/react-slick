@@ -195,7 +195,7 @@ export var InnerSlider = createReactClass({
         slideCount: this.state.slideCount,
         slidesToShow: this.props.slidesToShow,
         currentSlide: this.state.currentSlide,
-        trackWidth: this.state.trackWidth,
+        listWidth: this.state.listWidth,
       };
 
       bar = (<Bar {...barProps} />);
